@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CaveClan Wireframes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ECEBE6; --sheet:#F7F6F2; --ink:#161616; --mid:#6E6D68; --soft:#C9C8C2; --fill:#DDDCD6;
+  --red:#E3120B; --blue:#2448C8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--paper);color:var(--ink);font:15px/1.5 "Space Grotesk",system-ui,sans-serif}
+.mono{font-family:"JetBrains Mono",monospace}
+a{color:inherit}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:50;background:var(--ink);color:var(--sheet);display:flex;align-items:center;gap:20px;padding:0 24px;height:56px;overflow-x:auto}
+.top b{font:800 13px "JetBrains Mono";letter-spacing:.08em;white-space:nowrap}
+.top b span{color:var(--red)}
+.top nav{display:flex;gap:4px;margin-left:auto}
+.top nav a{font:600 11px "JetBrains Mono";text-decoration:none;padding:8px 10px;border-radius:4px;white-space:nowrap;letter-spacing:.04em}
+.top nav a:hover{background:#333}
+
+.wrap{max-width:1360px;margin:0 auto;padding:0 24px}
+.chapter{padding:72px 0 24px}
+.chapter-head{display:flex;align-items:baseline;gap:18px;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:32px}
+.chapter-head .n{font:800 14px "JetBrains Mono";color:var(--red)}
+.chapter-head h2{font:700 40px/1 "Space Grotesk";letter-spacing:-.02em}
+.chapter-head p{margin-left:auto;max-width:440px;color:var(--mid);font-size:14px;text-align:right}
+
+/* cover */
+.cover{padding:64px 0 32px;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:end}
+.cover h1{font:700 clamp(44px,7vw,96px)/.92 "Space Grotesk";letter-spacing:-.04em}
+.cover h1 em{font-style:normal;color:var(--red)}
+.cover .meta{font:13px/1.7 "JetBrains Mono";color:var(--mid)}
+.cover .meta strong{color:var(--ink)}
+.bigidea{margin-top:40px;background:var(--ink);color:var(--sheet);padding:32px;border-radius:6px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.bigidea .tag{font:800 11px "JetBrains Mono";color:var(--red);letter-spacing:.1em}
+.bigidea h3{font:700 32px/1.1 "Space Grotesk";letter-spacing:-.02em}
+.bigidea p{color:#B8B7B0;margin-top:10px;max-width:760px}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;background:var(--sheet);font-size:13.5px}
+.tbl th{font:800 10.5px "JetBrains Mono";letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:12px 14px;background:var(--ink);color:var(--sheet)}
+.tbl td{padding:14px;border-bottom:1px solid var(--soft);vertical-align:top}
+.tbl tr:hover td{background:#fff}
+.tbl td:first-child{font-weight:700;white-space:nowrap}
+.tbl .q{font-style:italic;color:var(--mid)}
+.pill{display:inline-block;font:600 10.5px "JetBrains Mono";border:1.5px solid var(--ink);border-radius:20px;padding:2px 8px;margin:2px 2px 2px 0;white-space:nowrap}
+.pill.r{border-color:var(--red);color:var(--red)}
+.tbl-scroll{overflow-x:auto;border:2px solid var(--ink);border-radius:6px}
+
+/* psychology grid */
+.psy{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.psy .card{background:var(--sheet);border:1.5px solid var(--ink);border-radius:6px;padding:18px}
+.psy .card .k{font:800 10.5px "JetBrains Mono";color:var(--red);letter-spacing:.08em}
+.psy .card h4{font:700 18px/1.2 "Space Grotesk";margin:6px 0 8px}
+.psy .card p{font-size:13.5px;color:#3a3a37}
+.psy .card .where{margin-top:10px;font:600 11px "JetBrains Mono";color:var(--blue)}
+.rule{margin-top:18px;border:2px dashed var(--red);padding:16px 18px;border-radius:6px;font-size:14px;background:#fff}
+.rule b{color:var(--red)}
+
+/* sitemap */
+.sitemap{background:var(--sheet);border:2px solid var(--ink);border-radius:6px;padding:32px;overflow-x:auto}
+.tree{display:flex;flex-direction:column;align-items:center;min-width:1100px}
+.node{border:2px solid var(--ink);background:#fff;border-radius:4px;padding:10px 14px;font:700 13px "Space Grotesk";text-align:center;position:relative}
+.node small{display:block;font:500 10.5px "JetBrains Mono";color:var(--mid);margin-top:2px}
+.node.root{background:var(--ink);color:#fff;font-size:16px;padding:14px 28px}
+.node.root small{color:#aaa}
+.node.hot{border-color:var(--red);box-shadow:4px 4px 0 var(--red)}
+.vline{width:2px;height:28px;background:var(--ink)}
+.level{display:flex;width:100%;position:relative;padding-top:28px}
+.branch{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;padding:0 8px}
+.branch::before{content:"";position:absolute;top:-28px;left:50%;width:2px;height:28px;margin-left:-1px;background:var(--ink)}
+.branch::after{content:"";position:absolute;top:-28px;left:0;right:0;height:2px;background:var(--ink)}
+.branch:first-child::after{left:50%}
+.branch:last-child::after{right:50%}
+.kids{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.kids .node{font-size:11.5px;padding:6px 10px;font-weight:500}
+.svc-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle;border:1px solid var(--ink)}
+.footer-links{margin-top:28px;border-top:2px dashed var(--soft);padding-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;font:600 12px "JetBrains Mono"}
+
+/* wireframe rows */
+.wf{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;margin-bottom:28px;align-items:start}
+.frame{background:#fff;border:2px solid var(--ink);border-radius:6px;overflow:hidden;position:relative}
+.frame-bar{height:26px;border-bottom:2px solid var(--ink);display:flex;align-items:center;gap:6px;padding:0 10px;background:var(--sheet)}
+.frame-bar i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink)}
+.frame-bar span{margin-left:10px;font:600 10px "JetBrains Mono";color:var(--mid)}
+.screen{padding:22px;position:relative}
+.screen.dark{background:#2a2a2a;color:#eee}
+.lbl{font:800 10px "JetBrains Mono";letter-spacing:.1em;color:var(--mid);text-transform:uppercase}
+.dark .lbl{color:#999}
+.box{border:1.5px dashed #9b9a94;background:var(--fill);border-radius:4px;padding:12px;position:relative;font:600 11px "JetBrains Mono";color:#55544f}
+.dark .box{background:#3a3a3a;border-color:#666;color:#bbb}
+.media{background-color:var(--fill);background-image:linear-gradient(to top right,transparent calc(50% - 1px),#a9a8a2 50%,transparent calc(50% + 1px)),linear-gradient(to bottom right,transparent calc(50% - 1px),#a9a8a2 50%,transparent calc(50% + 1px));border:1.5px solid #9b9a94;border-radius:4px;display:flex;align-items:center;justify-content:center;font:700 10.5px "JetBrains Mono";color:#55544f;text-align:center;padding:8px}
+.media span{background:var(--fill);padding:3px 6px}
+.dark .media{background-color:#3a3a3a;border-color:#666;color:#ccc;background-image:linear-gradient(to top right,transparent calc(50% - 1px),#555 50%,transparent calc(50% + 1px)),linear-gradient(to bottom right,transparent calc(50% - 1px),#555 50%,transparent calc(50% + 1px))}
+.dark .media span{background:#3a3a3a}
+.h{font:700 28px/1 "Space Grotesk";letter-spacing:-.02em}
+.h.xl{font-size:44px;letter-spacing:-.03em}
+.h.sm{font-size:18px}
+.t{height:8px;background:var(--soft);border-radius:4px;margin:7px 0}
+.dark .t{background:#555}
+.btn{display:inline-block;border:2px solid var(--ink);border-radius:30px;padding:8px 16px;font:700 11px "JetBrains Mono";letter-spacing:.04em}
+.btn.p{background:var(--ink);color:#fff}
+.dark .btn{border-color:#ddd}
+.dark .btn.p{background:#ddd;color:#111}
+.row{display:flex;gap:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.c{position:absolute;width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font:800 12px/26px "JetBrains Mono";text-align:center;box-shadow:0 0 0 3px #fff;z-index:3}
+.note{background:var(--sheet);border:1.5px solid var(--ink);border-radius:6px;padding:18px;position:sticky;top:72px}
+.note h3{font:700 20px/1.15 "Space Grotesk";margin-bottom:4px}
+.note .sec{font:800 10.5px "JetBrains Mono";color:var(--red);letter-spacing:.1em}
+.note dl{margin-top:12px;display:grid;gap:10px}
+.note dt{font:800 10px "JetBrains Mono";letter-spacing:.08em;color:var(--mid);text-transform:uppercase}
+.note dd{font-size:13.5px;line-height:1.45}
+.note dd ol,.note dd ul{padding-left:18px}
+.note dd li{margin:3px 0}
+.note .cn{display:inline-block;width:18px;height:18px;border-radius:50%;background:var(--red);color:#fff;font:800 10px/18px "JetBrains Mono";text-align:center;margin-right:4px}
+.copy{background:#fff;border-left:3px solid var(--red);padding:8px 10px;font-size:13px;font-style:italic;margin-top:4px}
+.secnum{font:800 11px "JetBrains Mono";background:var(--ink);color:#fff;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:10px;letter-spacing:.06em}
+
+/* figure sketch */
+.op{position:relative;width:220px;height:240px;margin:0 auto}
+.op .head{position:absolute;left:50%;top:18px;transform:translateX(-50%);width:120px;height:140px;border:2px solid #ddd;border-radius:46% 46% 42% 42%}
+.op .crest{position:absolute;left:50%;top:-2px;transform:translateX(-30%);width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-bottom:30px solid #ddd}
+.op .crest.b{transform:translateX(10%);border-bottom-width:22px;top:6px}
+.op .eye{position:absolute;top:58px;width:36px;height:22px;border:2px solid #ddd;border-radius:60% 20% 60% 20%}
+.op .eye.l{left:18px}.op .eye.r{right:18px;transform:scaleX(-1)}
+.op .body{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:220px;height:80px;border:2px solid #ddd;border-bottom:none;border-radius:60px 60px 0 0}
+.op .tie{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:16px;height:60px;border:2px solid #ddd;border-bottom:none}
+.fig{width:90px;position:relative}
+.fig .fh{width:58px;height:66px;border:2px solid #555;border-radius:48% 48% 44% 44%;margin:0 auto;background:#fff}
+.fig .fb{width:110px;height:120px;margin:-4px 0 0 -10px;border:2px solid #555;border-radius:40px 40px 6px 6px;background:linear-gradient(90deg,transparent 46%,#d33 46% 54%,transparent 54%),#fff}
+.fig .fl{width:60px;height:110px;margin:0 auto;border:2px solid #555;border-top:0;background:#fff}
+.arrow{position:absolute;font:700 10px "JetBrains Mono";color:#ff8a85}
+
+.flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:6px}
+.flow .step{flex:1;min-width:170px;background:#fff;border:2px solid var(--ink);border-radius:6px;padding:14px;position:relative}
+.flow .arr{display:flex;align-items:center;padding:0 6px;font:800 18px "JetBrains Mono"}
+.flow .step .lbl{color:var(--red)}
+.flow .step h5{font:700 15px/1.2 "Space Grotesk";margin:6px 0}
+.flow .step p{font-size:12.5px;color:#444}
+.opts{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.opts span{font:600 10px "JetBrains Mono";border:1.5px solid var(--soft);border-radius:3px;padding:3px 6px}
+
+.phone{width:250px;border:2px solid var(--ink);border-radius:26px;background:#fff;padding:10px;flex-shrink:0}
+.phone .scr{border:1.5px solid var(--soft);border-radius:18px;height:470px;overflow:hidden;padding:12px;position:relative;background:#fafaf8}
+.phones{display:flex;gap:22px;overflow-x:auto;padding-bottom:10px}
+
+.endnote{margin:56px 0 80px;background:var(--ink);color:var(--sheet);border-radius:6px;padding:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.endnote h4{font:800 11px "JetBrains Mono";color:var(--red);letter-spacing:.1em;margin-bottom:10px}
+.endnote p,.endnote li{font-size:14px;color:#cfcec7}
+.endnote ul{padding-left:18px}
+.endnote li{margin:4px 0}
+
+@media (max-width:980px){
+  .wf{grid-template-columns:1fr}
+  .note{position:static}
+  .cover{grid-template-columns:1fr}
+  .bigidea{grid-template-columns:1fr}
+  .chapter-head{flex-wrap:wrap}
+  .chapter-head p{margin-left:0;text-align:left}
+  .endnote{grid-template-columns:1fr}
+  .grid7{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  .grid3,.grid4{grid-template-columns:1fr 1fr}
+  .h.xl{font-size:30px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <b>CAVECLAN<span>/</span>WIREFRAMES v1.0</b>
+  <nav>
+    <a href="#strategy">01 Strategy</a>
+    <a href="#personas">02 Personas</a>
+    <a href="#psychology">03 Psychology</a>
+    <a href="#sitemap">04 Sitemap</a>
+    <a href="#home">05 Home</a>
+    <a href="#service">06 Service page</a>
+    <a href="#diary">07 Case study</a>
+    <a href="#scan">08 Blind-Spot Check</a>
+    <a href="#mobile">09 Mobile</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+<!-- ================= COVER / STRATEGY ================= -->
+<section class="cover" id="strategy">
+  <div>
+    <div class="mono" style="font-size:12px;color:var(--red);font-weight:800;letter-spacing:.1em;margin-bottom:16px">WEBSITE STRUCTURE · WIREFRAMES</div>
+    <h1>Every business has a <em>blind spot.</em><br>We see it coming.</h1>
+  </div>
+  <div class="meta">
+    <p><strong>Project:</strong> CaveClan Studios website</p>
+    <p><strong>Doc:</strong> Information architecture + wireframes</p>
+    <p><strong>Content source:</strong> CaveClan Studios company profile (7 services, 4-step process, client case studies, packages)</p>
+    <p><strong>Brand line:</strong> No excuses, just results.</p>
+  </div>
+</section>
+
+<div class="bigidea">
+  <div class="tag">THE ONE IDEA<br>EVERYTHING HANGS ON</div>
+  <div>
+    <h3>CaveClan finds the blind spot in your business. The site proves it before anyone hires us.</h3>
+    <p>Every business has something quietly holding it back: a weak brand, dead socials, ads that burn money, a site that doesn't sell. The site's job is to <b style="color:#fff">make the visitor feel understood</b>. The look takes its cue from premium personal-brand and sports websites: a light, airy layout, big confident type, one bold red accent, and a single personality who carries the page. An original cartoon character in a black suit and white shirt (with a little red pocket square shaped like the logo peaks) looks back at the visitor and follows their cursor, giving the brand a face that people remember.</p>
+  </div>
+</div>
+
+<!-- ================= PERSONAS ================= -->
+<section class="chapter" id="personas">
+  <div class="chapter-head"><span class="n">02</span><h2>Nine visitors, nine routes</h2><p>Every section on the site exists to move at least one of these people one step closer. If a section serves none of them, cut it.</p></div>
+  <div class="tbl-scroll">
+  <table class="tbl">
+    <thead><tr><th>#&nbsp;Persona</th><th>Voice in their head</th><th>Usually lands on</th><th>What hooks them</th><th>Route through the site</th><th>Win = </th></tr></thead>
+    <tbody>
+      <tr><td>1 · The Stranger</td><td class="q">"Who even are these guys?"</td><td>Home (IG bio, referral link)</td><td>A character who looks back at them. It's unexpected enough to stop the scroll.</td><td><span class="pill">Hero</span><span class="pill">Statement</span><span class="pill">Service tiles</span><span class="pill">Diaries</span></td><td>Scrolls past 60%; follows on Instagram or starts the Blind-Spot Check</td></tr>
+      <tr><td>2 · The Aching Business</td><td class="q">"Something's wrong and I can't even name it."</td><td>Home → service tiles</td><td>Being described better than they can describe themselves</td><td><span class="pill r">Service tiles</span><span class="pill">Service page</span><span class="pill r">Blind-Spot Check</span></td><td>Completes the Blind-Spot Check</td></tr>
+      <tr><td>3 · The Shopper</td><td class="q">"Can they do <u>this</u> specifically?"</td><td>A service page (Google / ad)</td><td>Proof for their exact problem, told as a story in that service's color</td><td><span class="pill">Service page</span><span class="pill">Client Diary</span><span class="pill">Clans</span></td><td>WhatsApp chat prefilled with the service name</td></tr>
+      <tr><td>4 · The Comparer</td><td class="q">"Why them over the other 3 tabs I've got open?"</td><td>Home / Clans</td><td>A clear process, visible pricing, and an identity the other agencies don't have</td><td><span class="pill">Four steps</span><span class="pill">Clans</span><span class="pill">Straight answers</span></td><td>Books a call</td></tr>
+      <tr><td>5 · The Sceptic</td><td class="q">"The last agency promised a lot and delivered little."</td><td>Work / About</td><td>Transparency, a clear process, real results, no hype</td><td><span class="pill">Case study</span><span class="pill">How we work</span><span class="pill r">Blind-Spot Check</span></td><td>A small first step (the Blind-Spot Check) instead of a big retainer</td></tr>
+      <tr><td>6 · The Gatekeeper</td><td class="q">"I need to sell this to my boss."</td><td>Service page / Clans</td><td>A complete service page they can share as a link: the journey, problems fixed, what's included and prices</td><td><span class="pill">Service</span><span class="pill r">Share the service page</span></td><td>Shares the page with the decision-maker</td></tr>
+      <tr><td>7 · The Grower</td><td class="q">"We're fine. We want 3×."</td><td>Home / Performance &amp; Digital Marketing</td><td>Ambition and systems language rather than "fix your problem"</td><td><span class="pill">Performance</span><span class="pill">Platinum Clan</span></td><td>A Platinum-tier call</td></tr>
+      <tr><td>8 · The Budget-Conscious</td><td class="q">"What can I get for my budget?"</td><td>Clans</td><td>Clear starting prices and a free resource</td><td><span class="pill">Clans</span><span class="pill">Free guide</span></td><td>Takes the free guide and stays in touch until the timing is right</td></tr>
+      <tr><td>9 · The Existing Client</td><td class="q">"Where's my stuff? What else can they do?"</td><td>Footer → Client Portal</td><td>Recognition and the next logical service</td><td><span class="pill">Portal</span><span class="pill">Cross-sell</span><span class="pill">Referral</span></td><td>Buys a second service or refers someone</td></tr>
+      <tr><td style="color:var(--mid)">+ Non-buyers</td><td class="q">Job seekers, freelancers, other agencies</td><td>Footer</td><td colspan="2">A careers link in the footer, keeping the enquiry form for clients</td><td>Enquiries stay client-focused</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ================= PSYCHOLOGY ================= -->
+<section class="chapter" id="psychology">
+  <div class="chapter-head"><span class="n">03</span><h2>The psychology playbook</h2><p>Each hook is placed on purpose. The blue line under each card says where it lives on the site.</p></div>
+  <div class="psy">
+    <div class="card"><div class="k">01 · PATTERN INTERRUPT</div><h4>Something is looking back at you</h4><p>The brain prioritises faces and anything that seems alive. A friendly face following the cursor breaks the "another agency site" autopilot in under 2 seconds.</p><div class="where">→ Hero · the character</div></div>
+    <div class="card"><div class="k">02 · BEING SEEN (MIRRORING)</div><h4>Name their pain better than they can</h4><p>We lead with problems in the visitor's own words, not with service names. When someone feels accurately described, they trust whoever described them.</p><div class="where">→ Service tiles · "Sound familiar?" on each service</div></div>
+    <div class="card"><div class="k">03 · CURIOSITY GAP</div><h4>Show the story, hold back the ending</h4><p>Client Diaries open like classified files. Results stay redacted until the visitor scrolls or hovers, and the brain hates leaving a loop open.</p><div class="where">→ Client Diaries · result reveals</div></div>
+    <div class="card"><div class="k">04 · FOOT IN THE DOOR</div><h4>Small yeses before the big one</h4><p>Five easy taps in the Blind-Spot Check. Each one is a micro-commitment, and people stay consistent with what they've already said.</p><div class="where">→ Blind-Spot Check</div></div>
+    <div class="card"><div class="k">05 · ZEIGARNIK / PROGRESS</div><h4>Unfinished things nag</h4><p>Progress bars, "Question 2 of 5" and a service journey line that draws itself as you scroll. Stopping halfway feels wrong.</p><div class="where">→ Blind-Spot Check · service journeys · workflow</div></div>
+    <div class="card"><div class="k">06 · SOCIAL PROOF</div><h4>Real clients, real work</h4><p>Real client names (Fruit Ninja, Wild Wings, Vivid, AM &amp; Sons…), real output, and (once collected) real numbers.</p><div class="where">→ Diaries · logo marquee · service pages</div></div>
+    <div class="card"><div class="k">07 · ANCHORING + DECOY</div><h4>Platinum makes Gold look obvious</h4><p>Show Platinum (500k+) prominently. Gold (300k) then reads as the sensible choice. Silver keeps the entry door open.</p><div class="where">→ Clans</div></div>
+    <div class="card"><div class="k">08 · LOSS AVERSION</div><h4>The cost of doing nothing</h4><p>People act harder to stop a loss than to chase a gain. Each service shows what staying put is quietly costing.</p><div class="where">→ Service page beat 3</div></div>
+    <div class="card"><div class="k">09 · RECIPROCITY</div><h4>Give the diagnosis first</h4><p>The Blind-Spot Check returns a real blind-spot readout for free. Getting value before paying makes the ask feel fair.</p><div class="where">→ Blind-Spot Check result · free guide for persona 8</div></div>
+    <div class="card"><div class="k">10 · CHOICE ARCHITECTURE</div><h4>One loud button per screen</h4><p>Too many options cause paralysis. Every viewport has one red primary action and at most one quiet secondary.</p><div class="where">→ Everywhere</div></div>
+    <div class="card"><div class="k">11 · PROCESSING FLUENCY</div><h4>Same chapters on every service</h4><p>Once someone has read one service page, they know how to read all seven. Easy to process feels true.</p><div class="where">→ Service template</div></div>
+    <div class="card"><div class="k">12 · PEAK–END RULE</div><h4>End on a high</h4><p>People remember the peak and the ending. The site ends with the character peeking up at the CTA, a giant sign-off line, and a one-tap WhatsApp.</p><div class="where">→ Final CTA · footer</div></div>
+  </div>
+  <div class="rule"><b>House rule: persuade, don't trick.</b> No fake countdowns, no "only 2 slots left" unless it's true, no hidden pricing games. Sceptical buyers (persona 5) are among the most valuable leads, and they recognise pressure tactics instantly. Honest persuasion converts better with them, and it's the reputation CaveClan wants.</div>
+</section>
+
+<!-- ================= SITEMAP ================= -->
+<section class="chapter" id="sitemap">
+  <div class="chapter-head"><span class="n">04</span><h2>Sitemap</h2><p>Shallow on purpose: every page is at most two clicks from home. Red outline = pages where visitors get in touch.</p></div>
+  <div class="sitemap">
+    <div class="tree">
+      <div class="node root">HOME<small>8 scenes, one story</small></div>
+      <div class="vline"></div>
+      <div class="level">
+        <div class="branch"><div class="node">Services<small>/services</small></div>
+          <div class="kids">
+            <div class="node"><span class="svc-dot" style="background:#7A4DFF"></span>Branding &amp; Visual Identity</div>
+            <div class="node"><span class="svc-dot" style="background:#0098BA"></span>Web Development</div>
+            <div class="node"><span class="svc-dot" style="background:#E8327F"></span>Social Media Management</div>
+            <div class="node"><span class="svc-dot" style="background:#C4F000"></span>Performance &amp; Digital Marketing</div>
+            <div class="node"><span class="svc-dot" style="background:#F09A00"></span>Video Production &amp; Editing</div>
+            <div class="node"><span class="svc-dot" style="background:#FF5A1F"></span>Premium Content Creation</div>
+            <div class="node"><span class="svc-dot" style="background:#2F55FF"></span>Event Management</div>
+          </div>
+        </div>
+        <div class="branch"><div class="node">Work<small>/work · client diaries</small></div>
+          <div class="kids">
+            <div class="node">Fruit Ninja</div><div class="node">Wild Wings</div><div class="node">Savage Tribe</div><div class="node">OwnPlace</div><div class="node">Vivid</div><div class="node">Crochezu</div><div class="node">AM &amp; Sons</div><div class="node">False</div>
+          </div>
+        </div>
+        <div class="branch"><div class="node hot">Blind-Spot Check<small>/check · diagnostic</small></div>
+          <div class="kids"><div class="node">5 questions</div><div class="node">Personal result</div><div class="node">→ WhatsApp / call</div></div>
+        </div>
+        <div class="branch"><div class="node">Packages<small>/packages · clans</small></div>
+          <div class="kids"><div class="node">Silver Clan · 150k</div><div class="node">Gold Clan · 300k</div><div class="node">Platinum Clan · 500k+</div><div class="node">Compare table</div></div>
+        </div>
+        <div class="branch"><div class="node">About<small>/about</small></div>
+          <div class="kids"><div class="node">Who we are</div><div class="node">How we work</div><div class="node">The team</div></div>
+        </div>
+        <div class="branch"><div class="node hot">Start a project<small>/contact</small></div>
+          <div class="kids"><div class="node">WhatsApp (primary)</div><div class="node">Book a call</div><div class="node">Short form</div></div>
+        </div>
+      </div>
+      <div class="footer-links"><span style="color:var(--mid)">FOOTER →</span><span class="pill">Careers</span><span class="pill">Client portal</span><span class="pill">Free growth guide</span><span class="pill">Instagram</span><span class="pill">Facebook</span><span class="pill">Privacy</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOME ================= -->
+<section class="chapter" id="home">
+  <div class="chapter-head"><span class="n">05</span><h2>Homepage, scene by scene</h2><p>Light, editorial and premium. One character carries the page, one red accent, lots of air. Eight scenes, each with a single job.</p></div>
+
+  <!-- S1 HERO -->
+  <div class="wf">
+    <div>
+      <span class="secnum">SCENE 01 · HERO</span>
+      <div class="frame">
+        <div class="frame-bar"><i></i><i></i><i></i><span>caveclanstudios.com</span></div>
+        <div class="screen" style="height:540px;background:repeating-radial-gradient(circle at 30% 45%,#fff 0 18px,#efeee9 18px 19px)">
+          <div class="row" style="justify-content:space-between;align-items:center">
+            <div class="box" style="width:120px;background:#fff">LOGO</div>
+            <div class="row" style="gap:6px"><div class="box" style="background:#fff">Services</div><div class="box" style="background:#fff">Work</div><div class="box" style="background:#fff">Process</div><div class="box" style="background:#fff">Packages</div></div>
+            <div class="row" style="gap:6px"><div class="btn">FIND MY BLIND SPOT</div><div class="btn p">START A PROJECT</div></div>
+          </div>
+          <span class="c" style="left:8px;top:38px">1</span>
+          <div style="position:absolute;left:22px;top:120px;font:800 54px/.9 'Space Grotesk';letter-spacing:-.03em">NO EXCUSES,<br><span style="color:var(--red)">JUST RESULTS.</span></div>
+          <span class="c" style="left:8px;top:110px">2</span>
+          <div class="fig" style="position:absolute;right:16%;top:70px"><div class="fh"></div><div class="fb"></div></div>
+          <span class="c" style="right:12%;top:80px">3</span>
+          <div class="arrow" style="right:30%;top:150px;color:var(--red)">head + eyes follow cursor →</div>
+          <div style="position:absolute;left:22px;bottom:30px;width:300px">
+            <div class="t" style="width:95%"></div><div class="t" style="width:80%"></div>
+            <div class="btn p" style="margin-top:10px">FIND MY BLIND SPOT →</div>
+          </div>
+          <span class="c" style="left:8px;bottom:110px">4</span>
+          <div class="box" style="position:absolute;right:22px;bottom:24px;width:200px;background:#fff;border-style:solid">▣ LATEST MISSION · Fruit Ninja →</div>
+          <span class="c" style="right:12px;bottom:70px">5</span>
+          <div class="arrow" style="left:34%;top:80px;color:var(--red)">◌ red contour lines under cursor</div>
+        </div>
+      </div>
+    </div>
+    <aside class="note">
+      <div class="sec">HERO · THE HOOK</div>
+      <h3>A real-feeling person who notices you</h3>
+      <dl>
+        <dt>Job</dt><dd>Stop the scroll in 2 seconds and say what CaveClan stands for.</dd>
+        <dt>Callouts</dt>
+        <dd><ol>
+          <li><span class="cn">1</span>Minimal nav. One red CTA plus one quiet one.</li>
+          <li><span class="cn">2</span>The brand line in huge type: "No excuses, just results."</li>
+          <li><span class="cn">3</span><b>The character</b> (original cartoon, black suit, white shirt, red pocket square): his head tilts toward the cursor, his eyes follow it, and he blinks. Black, white and red match the brand.</li>
+          <li><span class="cn">4</span>One line about what CaveClan is, plus the primary CTA.</li>
+          <li><span class="cn">5</span>A "latest mission" card. A small, always-current signal that the studio is busy and delivering.</li>
+        </ol></dd>
+        <dt>Background</dt><dd>Faint topographic contour lines, a nod to the mountain peaks in the logo. Under the cursor they turn red: a subtle reward for exploring the page.</dd>
+      </dl>
+    </aside>
+  </div>
+
+  <!-- S2 STATEMENT -->
+  <div class="wf">
+    <div>
+      <span class="secnum">SCENE 02 · WHO WE ARE (WORD FILL)</span>
+      <div class="frame"><div class="screen" style="height:320px">
+        <div class="lbl">WHO WE ARE</div>
+        <div style="margin-top:14px;font:600 28px/1.15 'Space Grotesk';max-width:62%;letter-spacing:-.02em">We're the team businesses call when growth stalls. Brand, web, social… <span style="color:#bbb">planned together, built together… <i style="font-family:Georgia">One clan. One plan.</i> No excuses.</span></div>
+        <div class="media" style="position:absolute;right:22px;top:30px;width:26%;height:110px"><span>WORK</span></div>
+        <div class="media" style="position:absolute;right:30%;bottom:20px;width:16%;height:90px"><span>WORK</span></div>
+        <div class="media" style="position:absolute;right:22px;bottom:30px;width:12%;height:120px"><span>WORK</span></div>
+        <span class="c" style="left:-10px;top:50px">1</span><span class="c" style="right:10px;top:20px">2</span>
+      </div></div>
+    </div>
+    <aside class="note">
+      <div class="sec">STATEMENT</div>
+      <h3>Who we are, in one paragraph</h3>
+      <dl><dd><ol><li><span class="cn">1</span>Large text. Words go from grey to black as you scroll, so the reader is pulled along line by line. Key phrases sit in italic red serif.</li><li><span class="cn">2</span>Real work floats beside the text with slow parallax: proof before we've even asked for anything.</li></ol></dd></dl>
+    </aside>
+  </div>
+
+  <!-- S3 SERVICES -->
+  <div class="wf">
+    <div>
+      <span class="secnum">SCENE 03 · SEVEN WAYS WE GROW YOU (HORIZONTAL)</span>
+      <div class="frame"><div class="screen" style="height:380px">
+        <div class="h">SEVEN WAYS WE GROW <i style="font-family:Georgia;color:var(--red)">you.</i></div>
+        <div class="row" style="margin-top:18px;overflow:hidden">
+          <div class="box" style="min-width:170px;height:230px;background:#9B7BFF;color:#fff;border:0"><i>"Nobody remembers our name."</i><br><br><b>BRANDING &amp; VISUAL IDENTITY</b><br><br>See how we fix it →</div>
+          <div class="box" style="min-width:170px;height:230px;background:#38B7D3;color:#fff;border:0"><i>"Our website doesn't sell."</i><br><br><b>WEB DEVELOPMENT</b></div>
+          <div class="box" style="min-width:170px;height:230px;background:#F07AB0;color:#fff;border:0"><i>"We post into the void."</i><br><br><b>SOCIAL MEDIA</b></div>
+          <div class="box" style="min-width:170px;height:230px;background:#D6F25E;border:0"><i>"Ads eat money."</i><br><br><b>PERFORMANCE</b></div>
+        </div>
+        <div style="height:2px;background:var(--soft);margin-top:14px"><div style="height:2px;width:35%;background:var(--ink)"></div></div>
+        <span class="c" style="left:-10px;top:90px">1</span><span class="c" style="right:10px;bottom:30px">2</span>
+      </div></div>
+    </div>
+    <aside class="note">
+      <div class="sec">SERVICES · PERSONAS 1, 2, 3</div>
+      <h3>Pain first, service second</h3>
+      <dl><dd><ol><li><span class="cn">1</span>Seven colored tiles, scrolled sideways while the section is pinned (a gallery-wall effect). Each tile leads with the problem in the client's own words, then the service name. Persona 2 recognises the pain, persona 3 recognises the service.</li><li><span class="cn">2</span>A progress line, then a final tile: "Not sure? Let us find it for you" → Blind-Spot Check.</li></ol></dd>
+      <dt>Click</dt><dd>A color curtain wipes across, then the service page opens (chapter 06).</dd></dl>
+    </aside>
+  </div>
+
+  <!-- S4 PROMISE -->
+  <div class="wf">
+    <div>
+      <span class="secnum">SCENE 04 · OUR PROMISE</span>
+      <div class="frame"><div class="screen" style="height:300px">
+        <div class="fig" style="position:absolute;left:60px;top:30px;transform:scale(.85);transform-origin:top left"><div class="fh"></div><div class="fb"></div><div class="fl"></div></div>
+        <div style="position:absolute;left:42%;top:70px;right:22px;font:400 30px/1.1 Georgia">Every business has a <i style="color:var(--red)">blind spot.</i> Our job is to see it first, and fix it fast.</div>
+        <span class="c" style="left:30px;top:20px">1</span><span class="c" style="left:40%;top:60px">2</span>
+      </div></div>
+    </div>
+    <aside class="note">
+      <div class="sec">BREATHER · TRUST</div>
+      <h3>A calm moment after the colour</h3>
+      <dl><dd><ol><li><span class="cn">1</span>The full-body character. He's still tracking the cursor, so he "listens" while you read.</li><li><span class="cn">2</span>One big serif line plus a sign-off from the team. It works as a palate cleanser before the work.</li></ol></dd></dl>
+    </aside>
+  </div>
+
+  <!-- S5 WORK -->
+  <div class="wf">
+    <div>
+      <span class="secnum">SCENE 05 · THE WORK</span>
+      <div class="frame"><div class="screen" style="height:360px">
+        <div class="row" style="justify-content:space-between;align-items:center"><div class="h">THE <i style="font-family:Georgia;color:var(--red)">work.</i></div><div class="row" style="gap:4px"><span class="pill">All</span><span class="pill">● Branding</span><span class="pill">● Social</span><span class="pill">● Content</span></div></div>
+        <div class="grid2" style="margin-top:14px"><div class="media" style="height:120px"><span>FRUIT NINJA</span></div><div class="media" style="height:120px"><span>WILD WINGS</span></div></div>
+        <div class="grid3" style="margin-top:12px"><div class="media" style="height:90px"><span>VIVID</span></div><div class="media" style="height:90px"><span>CROCHEZU</span></div><div class="media" style="height:90px"><span>FALSE</span></div></div>
+        <span class="c" style="right:10px;top:10px">1</span><span class="c" style="left:-10px;top:80px">2</span>
+      </div></div>
+    </div>
+    <aside class="note">
+      <div class="sec">PROOF · PERSONAS 3, 4, 5</div>
+      <h3>An editorial grid</h3>
+      <dl><dd><ol><li><span class="cn">1</span>Filter chips use the service colors, so persona 3 finds proof for their problem in one tap.</li><li><span class="cn">2</span>A mix of big and small cards. Each shows the client, the job, and a colored service tag. Hover to zoom; click for the full case study.</li></ol></dd></dl>
+    </aside>
+  </div>
+
+  <!-- S6 + S7 PROCESS / CLANS -->
+  <div class="wf">
+    <div>
+      <span class="secnum">SCENE 06 + 07 · FOUR STEPS · PICK YOUR CLAN (DARK)</span>
+      <div class="frame"><div class="screen dark" style="height:420px">
+        <div class="h" style="color:#eee">FOUR STEPS. <i style="font-family:Georgia;color:#ff6b63">No surprises.</i></div>
+        <div style="margin-top:10px;border-top:1px solid #555">
+          <div class="row" style="padding:8px 0;border-bottom:1px solid #555;align-items:center"><b style="color:#ff6b63;width:40px">01</b><b style="width:200px">DISCOVERY &amp; STRATEGY</b><div class="t" style="flex:1"></div></div>
+          <div class="row" style="padding:8px 0;border-bottom:1px solid #555;align-items:center"><b style="width:40px;color:#777">02</b><b style="width:200px">CONCEPT &amp; CREATION</b><div class="t" style="flex:1"></div></div>
+          <div class="row" style="padding:8px 0;border-bottom:1px solid #555;align-items:center"><b style="width:40px;color:#777">03</b><b style="width:200px">DEPLOY &amp; OPTIMISE</b><div class="t" style="flex:1"></div></div>
+          <div class="row" style="padding:8px 0;border-bottom:1px solid #555;align-items:center"><b style="width:40px;color:#777">04</b><b style="width:200px">REPORT &amp; SCALE</b><div class="t" style="flex:1"></div></div>
+        </div>
+        <span class="c" style="left:-10px;top:60px">1</span>
+        <div class="grid3" style="margin-top:20px;align-items:end">
+          <div class="box" style="height:110px">SILVER · 150k</div><div class="box" style="height:130px;background:#eee;color:#111">MOST CHOSEN<br>GOLD · 300k</div><div class="box" style="height:110px">PLATINUM · 500k+</div>
+        </div>
+        <span class="c" style="right:10px;bottom:40px">2</span>
+      </div></div>
+    </div>
+    <aside class="note">
+      <div class="sec">TRUST + PRICE · PERSONAS 4, 6, 7, 8</div>
+      <h3>Go dark for the serious part</h3>
+      <dl><dd><ol><li><span class="cn">1</span>The page flips to black: the shift in mood tells the reader this is the serious part. The four steps are CaveClan's standard process, and the row in view lights up red.</li><li><span class="cn">2</span>Packages with visible prices. Gold sits centre stage as the hero card (anchoring). Below: "Not sure? Find your blind spot in 45 seconds."</li></ol></dd>
+      <dt>Optional extra</dt><dd>"Who we work with" doors (start-ups / e-commerce / SMEs) can slot in before this if you want visitors to self-select by business type.</dd></dl>
+    </aside>
+  </div>
+
+  <!-- S8 FINAL -->
+  <div class="wf">
+    <div>
+      <span class="secnum">SCENE 08 · GOT A PROBLEM? GOOD. · FOOTER</span>
+      <div class="frame"><div class="screen" style="height:400px;text-align:center">
+        <div class="h xl">GOT A PROBLEM?<br><i style="font-family:Georgia;color:var(--red)">Good.</i></div>
+        <div class="row" style="justify-content:center;margin-top:12px"><div class="btn p">WHATSAPP THE CLAN</div><div class="btn">FIND MY BLIND SPOT</div></div>
+        <div class="fig" style="position:absolute;left:50%;bottom:90px;margin-left:-40px"><div class="fh"></div></div>
+        <span class="c" style="left:calc(50% + 50px);bottom:150px">1</span>
+        <div style="position:absolute;left:0;right:0;bottom:0;background:#161616;color:#eee;padding:14px 22px;text-align:left"><b style="font:800 26px 'Space Grotesk'">NO EXCUSES, <i style="font-family:Georgia;color:#ff6b63">just results.</i></b><div class="row" style="margin-top:8px;flex-wrap:wrap"><div class="box">Careers</div><div class="box">Client portal</div><div class="box">Free guide</div><div class="box">Contact</div></div></div>
+        <span class="c" style="left:10px;bottom:40px">2</span>
+      </div></div>
+    </div>
+    <aside class="note">
+      <div class="sec">CLOSE · PEAK–END</div>
+      <h3>He's waiting for you at the end</h3>
+      <dl><dd><ol><li><span class="cn">1</span>The character's head peeks up from below the buttons. When the cursor rests, he looks at the WhatsApp button, a gentle nudge toward the action.</li><li><span class="cn">2</span>A giant sign-off line, the memorable phrase people leave with, plus footer links for persona 9 (client portal) and job seekers.</li></ol></dd>
+      <dt>WhatsApp</dt><dd>Opens prefilled with whatever the visitor last looked at, e.g. "Hi CaveClan, I'm interested in Social Media Management."</dd></dl>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= SERVICE TEMPLATE ================= -->
+<section class="chapter" id="service">
+  <div class="chapter-head"><span class="n">06</span><h2>Service page: the full story</h2><p>Every service tile opens a full page that tells the whole story, so an owner recognises themselves, sees the journey, and trusts the outcome. No PDFs: everything lives on the page. One template, seven colours.</p></div>
+
+  <div class="wf">
+    <div>
+      <span class="secnum">TOP · HERO + CHAPTER BAR</span>
+      <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>/services/social-media-management · accent: #E8327F</span></div>
+        <div class="screen" style="padding:0">
+          <div class="row" style="padding:10px 16px;border-bottom:1.5px solid var(--soft);align-items:center;flex-wrap:wrap">
+            <div class="btn">← BACK</div><span class="lbl">Services / Social Media</span>
+            <div class="row" style="margin-left:auto;gap:4px;flex-wrap:wrap"><span class="pill" style="background:#E8327F;color:#fff;border-color:#E8327F">Is this you?</span><span class="pill">The journey</span><span class="pill">Problems we fix</span><span class="pill">Before &amp; after</span><span class="pill">Proof</span><span class="pill">What you get</span><span class="pill">Questions</span></div>
+            <div class="btn p">START A PROJECT</div>
+          </div>
+          <div style="height:3px;background:#E8327F;width:22%"></div>
+          <span class="c" style="right:10px;top:6px">1</span>
+          <div class="grid2" style="padding:22px;align-items:center">
+            <div><div class="lbl" style="color:#E8327F">03 / 07 · SOCIAL MEDIA MANAGEMENT</div>
+              <div class="h xl" style="margin-top:8px">YOU'RE POSTING<br><i style="font-family:Georgia;color:#E8327F;text-transform:none">into the void.</i></div>
+              <div class="t" style="width:80%"></div>
+              <div class="row" style="margin-top:12px"><div class="btn p" style="background:#E8327F;border-color:#E8327F">FIX THIS WITH US →</div><div class="btn">SEE THE FULL JOURNEY ↓</div></div></div>
+            <div class="box" style="height:220px;background:#E8327F;border:0;position:relative"><div class="fig" style="position:absolute;left:30px;bottom:0"><div class="fh"></div><div class="fb"></div></div><div class="media" style="position:absolute;right:16px;top:16px;width:45%;height:100px"><span>WORK</span></div></div>
+          </div>
+          <span class="c" style="left:8px;top:120px">2</span>
+        </div>
+      </div>
+    </div>
+    <aside class="note">
+      <div class="sec">HERO · PERSONA 3</div>
+      <h3>"That's exactly my problem."</h3>
+      <dl><dd><ol>
+        <li><span class="cn">1</span><b>Sticky chapter bar</b> with a reading-progress line. It shows how much story there is and lets busy owners jump to the bit they care about. Persona 6 (the gatekeeper) just shares the page link: it's the full brief.</li>
+        <li><span class="cn">2</span>The pain as the headline, in the owner's words, then the promise. Two CTAs: <b>Fix this with us</b> (WhatsApp, prefilled with the service) and <b>See the full journey</b>. The character stands on the service colour, still following the cursor.</li>
+      </ol></dd></dl>
+    </aside>
+  </div>
+
+  <div class="wf">
+    <div>
+      <span class="secnum">CH.1–2 · IS THIS YOU? · THE COST OF WAITING</span>
+      <div class="frame"><div class="screen" style="height:380px">
+        <div class="h">THINGS OWNERS <i style="font-family:Georgia;color:#E8327F;text-transform:none">tell us.</i></div>
+        <div class="grid3" style="margin-top:12px">
+          <div class="box" style="background:#fff;border-style:solid;height:110px;font-family:Georgia;font-size:12px;font-weight:400">“I post almost every day. Same 40 likes, mostly friends and family.”<br><br><span class="pill">That's me</span></div>
+          <div class="box" style="background:#fff;border:2px solid #E8327F;height:110px;font-family:Georgia;font-size:12px;font-weight:400">“Social media is everyone's job here, so it's nobody's job.”<br><br><span class="pill" style="background:#E8327F;color:#fff;border-color:#E8327F">Yep, that's me ✓</span></div>
+          <div class="box" style="background:#fff;border-style:solid;height:110px;font-family:Georgia;font-size:12px;font-weight:400">“Our competitor's feed looks like a magazine. Ours looks like a noticeboard.”<br><br><span class="pill">That's me</span></div>
+        </div>
+        <span class="c" style="left:-10px;top:60px">1</span>
+        <div class="grid2" style="margin-top:14px">
+          <div><div class="box" style="background:#fff">☐ You post a lot and nothing moves</div><div class="box" style="background:#fff;margin-top:5px">☑ Nobody on the team owns it</div><div class="box" style="background:#fff;margin-top:5px">☑ Every post looks different</div></div>
+          <div class="box" style="background:#fff;border-style:solid;height:100px"><b style="font:400 30px Georgia;color:#E8327F">2/4</b><br>"This page is about you."</div>
+        </div>
+        <span class="c" style="right:10px;top:200px">2</span>
+        <div style="margin-top:12px;font:400 18px Georgia">Silence on social reads as <i style="color:#E8327F">closed.</i> Your competitors fill the feed you left empty.</div>
+        <span class="c" style="left:-10px;bottom:20px">3</span>
+      </div></div>
+    </div>
+    <aside class="note">
+      <div class="sec">RECOGNITION · PERSONAS 2, 5</div>
+      <h3>Let them see themselves first</h3>
+      <dl><dd><ol>
+        <li><span class="cn">1</span><b>Is this you?</b> Three short first-person moments owners actually say. Each has a "That's me" button: a tiny yes that builds commitment.</li>
+        <li><span class="cn">2</span><b>Sound familiar?</b> A symptom checklist with a live counter ("2 of 4, this page is about you").</li>
+        <li><span class="cn">3</span><b>The cost of waiting:</b> one big line about what standing still costs (loss aversion, honest wording only).</li>
+      </ol></dd>
+      <dt>Content tip</dt><dd>Use real lines from discovery calls and client WhatsApps where possible (with permission). Real words beat written ones.</dd></dl>
+    </aside>
+  </div>
+
+  <div class="wf">
+    <div>
+      <span class="secnum">CH.3 · THE JOURNEY (WHAT WORKING WITH US LOOKS LIKE)</span>
+      <div class="frame"><div class="screen" style="height:420px">
+        <div class="h">WHAT WORKING WITH US <i style="font-family:Georgia;color:#E8327F;text-transform:none">looks like.</i></div>
+        <div style="position:relative;margin-top:16px;padding-left:46px">
+          <div style="position:absolute;left:15px;top:6px;bottom:6px;width:2px;background:var(--soft)"><div style="height:55%;background:#E8327F"></div></div>
+          <div style="position:relative;margin-bottom:12px"><div style="position:absolute;left:-46px;width:32px;height:32px;border-radius:50%;background:#E8327F;color:#fff;text-align:center;font:700 13px/32px Georgia">1</div><b>AUDIT</b><div class="grid2" style="margin-top:4px"><div class="box" style="background:#fff">WHAT WE DO · accounts, audience, competitors</div><div class="box" style="background:#222;color:#eee;border-color:#222">WHAT YOU'LL SEE · an honest look at what works</div></div></div>
+          <div style="position:relative;margin-bottom:12px"><div style="position:absolute;left:-46px;width:32px;height:32px;border-radius:50%;background:#E8327F;color:#fff;text-align:center;font:700 13px/32px Georgia">2</div><b>STRATEGY</b><div class="grid2" style="margin-top:4px"><div class="box" style="background:#fff">WHAT WE DO · pillars, voice, rhythm</div><div class="box" style="background:#222;color:#eee;border-color:#222">WHAT YOU'LL SEE · a monthly plan you approve</div></div></div>
+          <div style="position:relative;margin-bottom:12px;opacity:.4"><div style="position:absolute;left:-46px;width:32px;height:32px;border-radius:50%;border:2px solid #E8327F;text-align:center;font:700 13px/30px Georgia;color:#E8327F">3</div><b>CREATE</b><div class="t" style="width:70%"></div></div>
+          <div style="position:relative;opacity:.25"><div style="position:absolute;left:-46px;width:32px;height:32px;border-radius:50%;border:2px solid #E8327F;text-align:center;font:700 13px/30px Georgia;color:#E8327F">4</div><b>PUBLISH &amp; ENGAGE → 5 REPORT &amp; GROW</b></div>
+        </div>
+        <span class="c" style="left:-10px;top:90px">1</span><span class="c" style="right:10px;top:150px">2</span>
+      </div></div>
+    </div>
+    <aside class="note">
+      <div class="sec">THE JOURNEY · PERSONAS 3, 4, 5</div>
+      <h3>Remove the fear of the unknown</h3>
+      <dl><dd><ol>
+        <li><span class="cn">1</span>Five stages on a vertical timeline. The line fills as you scroll, and each stage lights up when it reaches the middle of the screen (the progress feeling keeps people reading).</li>
+        <li><span class="cn">2</span>Every stage has two answers: <b>What we do</b> and <b>What you'll see</b>, the tangible thing the client gets at that point. That second column is what makes people trust the process.</li>
+      </ol></dd>
+      <dt>Content we need per service</dt><dd>5 stages · what happens in each · what the client receives. Add rough timings once the team confirms them.</dd></dl>
+    </aside>
+  </div>
+
+  <div class="wf">
+    <div>
+      <span class="secnum">CH.4–5 · PROBLEMS WE FIX · BEFORE &amp; AFTER</span>
+      <div class="frame"><div class="screen" style="height:420px">
+        <div class="h sm">REAL PROBLEMS, <i style="font-family:Georgia;color:#E8327F;text-transform:none">real fixes.</i></div>
+        <div class="grid3" style="margin-top:10px">
+          <div class="box" style="background:#fff;border-style:solid;line-height:1.6">01<br>PROBLEM · Posting daily, no growth<br>↓ FIX · plan built on what gets saved &amp; shared<br><span style="background:var(--fill);padding:2px 4px">CHANGED · real customer engagement</span></div>
+          <div class="box" style="background:#fff;border-style:solid;line-height:1.6">02<br>PROBLEM · Feed looked like 5 brands<br>↓ FIX · templates + one system<br><span style="background:var(--fill);padding:2px 4px">CHANGED · premium, recognisable grid</span></div>
+          <div class="box" style="background:#fff;border-style:solid;line-height:1.6">03<br>PROBLEM · Nobody owned social<br>↓ FIX · we run it, you approve<br><span style="background:var(--fill);padding:2px 4px">CHANGED · team gets time back</span></div>
+        </div>
+        <span class="c" style="left:-10px;top:60px">1</span>
+        <div class="h sm" style="margin-top:20px">WHERE YOU ARE. <i style="font-family:Georgia;color:#E8327F;text-transform:none">Where you'll be.</i></div>
+        <div style="border-top:2px solid var(--ink);margin-top:8px;font-size:13px">
+          <div class="row" style="padding:7px 0;border-bottom:1px solid var(--soft)"><s style="flex:1;color:#999">Random posts when there's time</s><span style="color:#E8327F">→</span><b style="flex:1">A planned calendar every month</b></div>
+          <div class="row" style="padding:7px 0;border-bottom:1px solid var(--soft)"><s style="flex:1;color:#999">Likes from friends</s><span style="color:#E8327F">→</span><b style="flex:1">Messages from customers</b></div>
+          <div class="row" style="padding:7px 0;border-bottom:1px solid var(--soft)"><s style="flex:1;color:#999">No idea what works</s><span style="color:#E8327F">→</span><b style="flex:1">A monthly report in plain words</b></div>
+        </div>
+        <span class="c" style="left:-10px;top:250px">2</span>
+      </div></div>
+    </div>
+    <aside class="note">
+      <div class="sec">TRANSFORMATION · PERSONAS 2, 3, 7</div>
+      <h3>Show the change, not just the service</h3>
+      <dl><dd><ol>
+        <li><span class="cn">1</span><b>Problems we fix:</b> three cards, each Problem → What we did → What changed. Owners scan for their own problem and find the fix right beside it.</li>
+        <li><span class="cn">2</span><b>Before &amp; after:</b> their world now (struck through) vs. after CaveClan. The "after" side slides in as it scrolls into view.</li>
+      </ol></dd>
+      <dt>Honesty rule</dt><dd>Only put numbers in "What changed" if a real client achieved them. Otherwise describe the change in words.</dd></dl>
+    </aside>
+  </div>
+
+  <div class="wf">
+    <div>
+      <span class="secnum">CH.6–8 · PROOF · WHAT YOU GET · QUESTIONS · CTA</span>
+      <div class="frame"><div class="screen" style="height:400px">
+        <div class="grid2"><div class="media" style="height:110px"><span>CASE STUDY (Crochezu)</span></div><div><div class="box" style="background:#fff">BEFORE · …</div><div class="box" style="background:#fff;margin-top:5px">WHAT WE DID · …</div><div class="box" style="background:#fff;margin-top:5px;border-style:solid">RESULT · one number + client quote</div></div></div>
+        <span class="c" style="left:-10px;top:20px">1</span>
+        <div class="grid3" style="margin-top:12px"><div class="box">Content calendar</div><div class="box">Custom posts</div><div class="box">Reels</div></div>
+        <div class="grid3" style="margin-top:6px"><div class="box" style="background:#fff">SILVER · 12 posts</div><div class="box" style="background:#fff;border:2px solid #E8327F">GOLD · 20 posts</div><div class="box" style="background:#fff">PLATINUM · unlimited</div></div>
+        <span class="c" style="right:10px;top:140px">2</span>
+        <div style="margin-top:12px"><div class="box" style="background:#fff">+ How soon will I see a difference?</div><div class="box" style="background:#fff;margin-top:4px">+ Do I own what you make?</div><div class="box" style="background:#fff;margin-top:4px">+ Can I start small?</div></div>
+        <span class="c" style="left:-10px;top:260px">3</span>
+        <div class="row" style="margin-top:12px;background:#E8327F;color:#fff;padding:12px;border-radius:6px;justify-content:space-between;align-items:center"><b>LET'S FIX IT TOGETHER.</b><div class="row"><div class="btn" style="background:#fff;color:#111">WHATSAPP US</div><div class="btn" style="border-color:#fff">FIND MY BLIND SPOT</div></div></div>
+        <span class="c" style="right:10px;bottom:20px">4</span>
+      </div></div>
+    </div>
+    <aside class="note">
+      <div class="sec">DECIDE · PERSONAS 4, 6, 8</div>
+      <h3>Make yes easy</h3>
+      <dl><dd><ol>
+        <li><span class="cn">1</span><b>Proof:</b> a real case study from the diaries: Before, What we did, Result.</li>
+        <li><span class="cn">2</span><b>What you get</b>, plus which Clan includes it, pulled from the packages.</li>
+        <li><span class="cn">3</span><b>Straight answers:</b> the objections owners raise, answered plainly.</li>
+        <li><span class="cn">4</span><b>CTA</b> in the service colour (WhatsApp prefilled with the service), then "Next service →" to keep exploring.</li>
+      </ol></dd></dl>
+    </aside>
+  </div>
+
+  <div class="tbl-scroll" style="margin-top:8px">
+  <table class="tbl">
+    <thead><tr><th>#</th><th>Service</th><th>Color</th><th>Headline</th><th>Journey (5 stages)</th><th>Portfolio examples</th></tr></thead>
+    <tbody>
+      <tr><td>01</td><td>Branding &amp; Visual Identity</td><td><span class="svc-dot" style="background:#7A4DFF"></span>#7A4DFF</td><td class="q">"Nobody remembers your name."</td><td>Discovery call → Brand audit → Strategy → Design → Roll-out</td><td>Fruit Ninja · Vivid · Savage Tribe</td></tr>
+      <tr><td>02</td><td>Web Development</td><td><span class="svc-dot" style="background:#0098BA"></span>#0098BA</td><td class="q">"Your website is a pretty brochure."</td><td>Discovery → Audit → Structure → Design &amp; build → Launch &amp; improve</td><td>To be added</td></tr>
+      <tr><td>03</td><td>Social Media Management</td><td><span class="svc-dot" style="background:#E8327F"></span>#E8327F</td><td class="q">"You're posting into the void."</td><td>Audit → Strategy → Create → Publish &amp; engage → Report &amp; grow</td><td>Crochezu · Wild Wings · AM &amp; Sons</td></tr>
+      <tr><td>04</td><td>Performance &amp; Digital Marketing</td><td><span class="svc-dot" style="background:#C4F000"></span>#C4F000</td><td class="q">"Your ads eat money and return likes."</td><td>Diagnose → Plan → Build → Launch &amp; test → Scale</td><td>To be added</td></tr>
+      <tr><td>05</td><td>Video Production &amp; Cinema Editing</td><td><span class="svc-dot" style="background:#F09A00"></span>#F09A00</td><td class="q">"Your story isn't landing."</td><td>Story → Pre-production → Shoot → Edit → Deliver</td><td>To be added</td></tr>
+      <tr><td>06</td><td>Premium Content Creation</td><td><span class="svc-dot" style="background:#FF5A1F"></span>#FF5A1F</td><td class="q">"You look cheaper than you are."</td><td>Moodboard → Plan → Shoot → Retouch → Content bank</td><td>False · OwnPlace</td></tr>
+      <tr><td>07</td><td>Event Management</td><td><span class="svc-dot" style="background:#2F55FF"></span>#2F55FF</td><td class="q">"Launch day needs to be loud."</td><td>Concept → Plan → Build-up → Event day → Amplify</td><td>To be added</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mono" style="font-size:12px;color:var(--mid);margin-top:10px">Content to collect per service: 3 owner quotes · 4 symptoms · 5 journey stages (what we do / what you'll see) · 3 problem→fix→change stories · 4 before/after pairs · 1 case study with a number · deliverables · FAQ answers. Brand red (#E5231B) stays reserved for CaveClan itself; service colours only live inside their own pages.</p>
+</section>
+
+<!-- ================= CASE STUDY ================= -->
+<section class="chapter" id="diary">
+  <div class="chapter-head"><span class="n">07</span><h2>Case study page</h2><p>Each client project is told as a short story (situation, blind spot, what we did, result) so it reads like proof, not a gallery.</p></div>
+  <div class="wf">
+    <div>
+      <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>/work/crochezu</span></div>
+        <div class="screen" style="height:230px">
+          <div class="lbl">CLIENT DIARIES · CASE STUDY</div>
+          <div class="h xl" style="margin-top:8px">CROCHEZU</div>
+          <div class="row" style="margin-top:10px;gap:6px"><span class="pill" style="border-color:#7A4DFF;color:#7A4DFF">● Branding</span><span class="pill" style="border-color:#E8327F;color:#E8327F">● Social Media</span></div>
+          <div class="media" style="position:absolute;right:22px;top:22px;width:45%;height:180px"><span>HERO IMAGE</span></div>
+          <span class="c" style="left:8px;top:8px">1</span>
+        </div>
+        <div class="screen" style="border-top:2px solid var(--ink)">
+          <div class="grid4">
+            <div><div class="lbl" style="color:var(--red)">01 · THE SITUATION</div><div class="t"></div><div class="t" style="width:80%"></div><div class="t"></div></div>
+            <div><div class="lbl" style="color:var(--red)">02 · THE BLIND SPOT</div><div class="t"></div><div class="t" style="width:70%"></div></div>
+            <div><div class="lbl" style="color:var(--red)">03 · WHAT WE DID</div><div class="media" style="height:70px"><span>GALLERY</span></div></div>
+            <div><div class="lbl" style="color:var(--red)">04 · THE RESULT</div><div class="box" style="height:70px;background:#fff;border-style:solid;font:400 26px Georgia;color:var(--red)">+00%</div></div>
+          </div>
+          <span class="c" style="left:-10px;top:20px">2</span>
+          <div class="box" style="margin-top:16px;background:#fff;border-style:solid;font-style:italic">"Client quote." · Name, role</div>
+          <div class="row" style="margin-top:14px;justify-content:space-between;align-items:center"><div class="btn p">SAME PROBLEM? START A PROJECT →</div><div class="lbl">NEXT CASE STUDY → VIVID</div></div>
+          <span class="c" style="right:10px;bottom:30px">3</span>
+        </div>
+      </div>
+    </div>
+    <aside class="note">
+      <div class="sec">CASE STUDY · PERSONAS 3, 5</div>
+      <h3>Situation → blind spot → what we did → result</h3>
+      <dl>
+        <dd><ol><li><span class="cn">1</span>Clean header: client name, services used as colour tags, and a large hero image in the client's own colours.</li><li><span class="cn">2</span>Four short chapters, each with its visuals. <b>"The blind spot"</b> is the key one: it shows that we diagnose, not just design.</li><li><span class="cn">3</span>The call to action mirrors the reader: "Same problem?", then a link to the next case study.</li></ol></dd>
+        <dt>Content per case study</dt><dd>Situation (2–3 lines) · the blind spot (1 line) · 6–12 visuals · one measurable result · a client quote · services used</dd>
+        <dt>Results</dt><dd>One clear number (followers, enquiries, sales) is the strongest proof on the page. Ask each client for one at project close.</dd>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= BLIND-SPOT CHECK ================= -->
+<section class="chapter" id="scan">
+  <div class="chapter-head"><span class="n">08</span><h2>Blind-Spot Check</h2><p>A 45-second diagnostic that does the consultancy job up front: it finds the weakness, then points to the fix. It is the site's main lead generator.</p></div>
+  <div class="flow">
+    <div class="step"><div class="lbl">Q1 · 1/5</div><h5>What do you run?</h5><p>Self-identification.</p><div class="opts"><span>Start-up</span><span>E-commerce</span><span>SME / Corporate</span><span>Restaurant / F&amp;B</span></div></div>
+    <div class="arr">→</div>
+    <div class="step"><div class="lbl">Q2 · 2/5</div><h5>Where are you right now?</h5><p>Business stage, which sets the package.</p><div class="opts"><span>Just launched</span><span>Growing</span><span>Plateaued</span><span>Struggling</span></div></div>
+    <div class="arr">→</div>
+    <div class="step"><div class="lbl">Q3 · 3/5</div><h5>What's the biggest problem?</h5><p>The same seven problems as the service tiles.</p><div class="opts"><span>Brand</span><span>Website</span><span>Social</span><span>Ads</span><span>Video</span><span>Content</span><span>Launch</span></div></div>
+    <div class="arr">→</div>
+    <div class="step"><div class="lbl">Q4 · 4/5</div><h5>Worked with an agency before?</h5><p>Shapes the tone of the result.</p><div class="opts"><span>Never</span><span>Yes, it went well</span><span>Yes, it didn't work out</span></div></div>
+    <div class="arr">→</div>
+    <div class="step"><div class="lbl">Q5 · 5/5</div><h5>In 90 days, success looks like…</h5><p>The goal, which opens the sales conversation.</p><div class="opts"><span>More leads</span><span>More sales</span><span>A known brand</span><span>A big launch</span></div></div>
+    <div class="arr">→</div>
+    <div class="step" style="background:var(--ink);color:#fff;border-color:var(--ink)"><div class="lbl">RESULT</div><h5>Your blind spot: ______</h5><p style="color:#ccc">A one-line diagnosis, the recommended service(s) in their colours, the recommended package and a relevant case study.</p><div class="opts"><span style="border-color:#666">Send this to the team</span><span style="border-color:#666">See the fix</span></div></div>
+  </div>
+  <div class="grid3" style="margin-top:18px">
+    <div class="note" style="position:static"><div class="sec">EXPERIENCE</div><dd style="font-size:13.5px;margin-top:6px">Full screen, one question at a time, large tap targets, auto-advance. The character stands beside the questions on a panel that takes the chosen service's colour, with a short reaction after each answer.</dd></div>
+    <div class="note" style="position:static"><div class="sec">HANDOFF</div><dd style="font-size:13.5px;margin-top:6px">"Send this to the team" opens WhatsApp with the full result prefilled, so the first conversation already knows the business type, stage, problem, history and goal.</dd></div>
+    <div class="note" style="position:static"><div class="sec">LOGIC</div><dd style="font-size:13.5px;margin-top:6px">Q3 sets the main service. Q1 + Q2 set the package. "Plateaued" adds Performance &amp; Digital Marketing. "It didn't work out" leads the result with transparency and a small first step.</dd></div>
+  </div>
+</section>
+
+<!-- ================= MOBILE ================= -->
+<section class="chapter" id="mobile">
+  <div class="chapter-head"><span class="n">09</span><h2>Mobile &amp; global behaviour</h2><p>Most visitors will arrive from Instagram on a phone, so these screens are designed first, not adapted later.</p></div>
+  <div class="phones">
+    <div class="phone"><div class="scr">
+      <div class="row" style="justify-content:space-between"><div class="box" style="padding:6px">LOGO</div><div class="btn p" style="padding:6px 10px">START</div></div>
+      <div style="font:800 24px/1 'Space Grotesk';margin-top:16px">NO EXCUSES,<br><span style="color:var(--red)">JUST RESULTS.</span></div>
+      <div class="fig" style="margin:30px auto 0"><div class="fh"></div><div class="fb"></div></div>
+      <div class="box" style="position:absolute;left:12px;right:12px;bottom:12px;background:#fff;border-style:solid">One line about CaveClan<br><span class="btn p" style="margin-top:6px">FIND MY BLIND SPOT</span></div>
+    </div></div>
+    <div class="phone"><div class="scr">
+      <div class="h sm">SEVEN WAYS WE GROW <i style="font-family:Georgia;color:var(--red);text-transform:none">you.</i></div>
+      <div class="box" style="margin-top:10px;height:300px;background:#E8327F;color:#fff;border:0"><i>"We post into the void."</i><br><br><b>SOCIAL MEDIA MANAGEMENT</b><br><br>See how we fix it →</div>
+      <div class="lbl" style="margin-top:8px">Swipe between services, one per screen</div>
+    </div></div>
+    <div class="phone"><div class="scr">
+      <div class="lbl" style="color:#E8327F">THE JOURNEY</div>
+      <div style="margin-top:8px;padding-left:28px;position:relative"><div style="position:absolute;left:9px;top:0;bottom:0;width:2px;background:#E8327F"></div>
+        <b>1 · AUDIT</b><div class="box" style="background:#fff;margin:4px 0 10px">What we do</div><div class="box" style="background:#222;color:#eee;border-color:#222;margin-bottom:12px">What you'll see</div>
+        <b>2 · STRATEGY</b><div class="box" style="background:#fff;margin:4px 0 10px">What we do</div></div>
+      <div class="lbl" style="margin-top:8px">Service pages stack to a single column</div>
+    </div></div>
+    <div class="phone"><div class="scr">
+      <div class="h sm">THE <i style="font-family:Georgia;color:var(--red);text-transform:none">work.</i></div>
+      <div class="media" style="height:200px;margin-top:10px"><span>CASE STUDY</span></div>
+      <div class="lbl" style="margin-top:8px">One column, filter chips scroll sideways</div>
+      <div style="position:absolute;left:10px;right:10px;bottom:10px;display:flex;gap:6px"><div class="btn p" style="flex:1;text-align:center">WHATSAPP</div></div>
+    </div></div>
+  </div>
+  <div class="endnote">
+    <div>
+      <h4>GLOBAL ELEMENTS</h4>
+      <ul>
+        <li><b>One face throughout:</b> the character appears in the hero, the promise section, every service page, the Blind-Spot Check and the footer, so the site feels like one guide.</li>
+        <li><b>Topographic background:</b> contour lines echoing the mountain peaks in the logo, turning red under the cursor.</li>
+        <li><b>Page transitions:</b> a colour wipe in the destination service's colour.</li>
+        <li><b>Smooth scrolling</b> with scroll-linked sections.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>THE CHARACTER</h4>
+      <ul>
+        <li><b>Concept:</b> an illustrated host in a black suit and white shirt, shown from the chest up. His head and eyes follow the cursor and he blinks.</li>
+        <li><b>Production:</b> final artwork by an illustrator or 3D artist in this style, animated in Rive for a real head turn, expressions and small gestures. Lightweight and phone-friendly.</li>
+        <li><b>Premium option:</b> a rigged 3D model (Blender → Three.js) for full 3D movement.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>BUILD NOTES</h4>
+      <ul>
+        <li>Next.js or Astro · GSAP ScrollTrigger · Lenis · a headless CMS (e.g. Sanity) so service content can be edited without code.</li>
+        <li>Respect <i>prefers-reduced-motion</i>: the character stays still and sections appear without animation.</li>
+        <li>Secure a commercial licence for the brand display typeface before launch.</li>
+        <li>Gather per service: case studies with one measurable result, client quotes and FAQ answers.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>
